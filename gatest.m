@@ -1,6 +1,6 @@
  
 nvars=8;
-lb=[1 1 1 1 1 1 1 1 ];
+lb=[1 2 3 4 5 6 7 8 ];
 ub=[32 32 32 32 32 32 32];
 %% This is an auto generated MATLAB file from Optimization Tool.
 

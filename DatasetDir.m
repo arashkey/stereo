@@ -179,11 +179,10 @@ else
 
     image_names{1} = 'Aloe';    image_names{2} = 'Baby1';    image_names{3} = 'Baby2';    image_names{4} = 'Baby3';    image_names{5} = 'Bowling1';    image_names{6} = 'Bowling2';    image_names{7} = 'Cloth1';    image_names{8} = 'Cloth2';    image_names{9} = 'Cloth3';    image_names{10} = 'Cloth4';    image_names{11} = 'Flowerpots';    image_names{12} = 'Lampshade1';    image_names{13} = 'Lampshade2';    image_names{14} = 'Midd1';    image_names{15} = 'Midd2';  image_names{16} = 'Monopoly'; image_names{17} = 'Plastic'; image_names{18} = 'Rocks1'; image_names{19} = 'Rocks2'; image_names{20} = 'Wood1'; image_names{21} = 'Wood2';
     %mindisp = [];
-<<<<<<< HEAD
-    ndisp=[70,45,52,51,77,66,57,76,55,67,60,65,65,69,62,53,65,57,56,72,72];
-=======
+
+
     ndisp=[70,45,52,51,77,66,57,76,55,67,60,65,65,69,62,53,65,57,56,72,72];%these are calculated per image and not provided by the data set!
->>>>>>> e95afb072f3b35be1b69ebc479fc1f956b2261ef
+
     %The exception is intensity 0, which means unknown disparity
     
     for a=1:1;%just has train set
@@ -213,11 +212,8 @@ else
                 
                 % Adjust the range of disparities to the chosen resolution
 %                 if b==1
-<<<<<<< HEAD
-                     AllImages(count).maxDisp = ndisp(im_num);%FIX: these are calculated per image and not provided by the data set!
-=======
+
                      AllImages(count).maxDisp = 85;%FIX: as "2016-correctness prediction..." said 
->>>>>>> e95afb072f3b35be1b69ebc479fc1f956b2261ef
 %                 elseif b==2
 %                     AllImages(count).maxDisp = round(ndisp(im_num)/2);
 %                 else
@@ -271,11 +267,8 @@ else
                 
                 % Adjust the range of disparities to the chosen resolution
 %                 if b==1
-<<<<<<< HEAD
-                     AllImages(count).maxDisp = ndisp(im_num);%FIX: these are calculated per image and not provided by the data set!
-=======
+
                      AllImages(count).maxDisp =85;%FIX: as "2016-correctness prediction..." said
->>>>>>> e95afb072f3b35be1b69ebc479fc1f956b2261ef
 %                 elseif b==2
 %                     AllImages(count).maxDisp = round(ndisp(im_num)/2);
 %                 else
