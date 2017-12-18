@@ -1,5 +1,10 @@
-function MRF_labeling = FastPD(CostVolume, numlabels ,disparity)
-CostVolume=CostVolume+abs(min(CostVolume(:)));
+function MRF_labeling = FastPD(CostVolume, numlabels ,disparity,Cost,imgL3D )
+MINVALUE=min(CostVolume(:));
+MULVALUE=round(1000/max(CostVolume(:)));
+
+CostVolume=(CostVolume+MINVALUE)*MULVALUE;
+Cost=(Cost+MINVALUE)*MULVALUE;
+
 tic
 DEBUG=true;
 if (DEBUG)
@@ -22,7 +27,7 @@ numpoints = h * w;
 
 numpairs = 2 * h * w - h - w;
 maxIters = 100;
-type = 'int32';
+type = 'uint32';
 
 fwrite(fid, numpoints, type);
 fwrite(fid, numpairs, type);
@@ -64,7 +69,7 @@ end
 %     end
 % end 
 
-fwrite(fid,uint32( CostVolume*10000), type);
+fwrite(fid,uint32( CostVolume ), type);
 
 if (DEBUG)
     disp 'wrote label costs'
@@ -128,24 +133,24 @@ end
 
 %defocos => fwrite(fid, ones(1, numpairs), type);
 
-wcosts=zeros(w,h);
-landaC=3.6;
+Esmooth=zeros(w,h);%(9) formola
 
 
-
-% parfor i=1:w
-%     for j=1:h
-%         x=double(imgL3D(i,j,:));
-%
-%         result=    power(imgR3D(:,:,1)-x(:,:,1),2) ...
-%             + power(imgR3D(:,:,2)-x(:,:,2),2) ...
-%             + power(imgR3D(:,:,3)-x(:,:,3),2) ;
-%         oghlidosDistanceRGB= sqrt(double(result)          );
-%         expCompute=exp( - oghlidosDistanceRGB/landaC );
-%         wcosts(i,j)=  max(  [  expCompute(:) ; 0.0003]  );
-%     end
-% end
-fwrite(fid,disparity, type);
+  p=double(imgL3D ); 
+   
+  
+ for i=2:w-1
+	for j=2:h-1
+		Esmooth(i,j)= ...
+            Wpq(p(i,j,:),p(i-1,j,:),disparity(i,j),disparity(i-1,j)) + ...
+            Wpq(p(i,j,:),p(i+1,j,:),disparity(i,j),disparity(i+1,j)) + ...
+            Wpq(p(i,j,:),p(i,j-1,:),disparity(i,j),disparity(i,j-1)) + ...
+            Wpq(p(i,j,:),p(i,j+1,:),disparity(i,j),disparity(i,j+1)) ;
+	end
+end
+Edata=Cost;
+Ed=Edata+(Esmooth+MINVALUE)*MULVALUE ;
+fwrite(fid,Ed, type);%wcost
 
 % graph edge costs (cost if falls on image edges)
 %    for i = 1:h

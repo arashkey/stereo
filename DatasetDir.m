@@ -1,8 +1,8 @@
 if exist('AllImages.mat', 'file') == 2
     load('AllImages.mat');
 else 
-   %dataset_root='F:/_pro_/matlab/MyWork/StereoMatching/MyProjct/Dataset'; 
-    dataset_root='C:/Users/mahdi/Documents/Dataset'; 
+   dataset_root='F:/_pro_/matlab/MyWork/StereoMatching/MyProjct/Dataset'; 
+   % dataset_root='C:/Users/mahdi/Documents/Dataset'; 
     %dataset_root='F:/_pro_/matlab/MyWork/StereoMatching/MyProjct/Dataset/';
     %dataset_root='F:/_pro_/matlab/MyWork/StereoMatching/MyProjct/git/Arash/ensemble method (idea)/Dataset';
       

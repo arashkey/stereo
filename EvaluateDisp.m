@@ -1,8 +1,12 @@
-function [ dispError , imgMask , badPixels] = EvaluateDisp(ImageStruct,LEstDisp,tau) 
-%TODO: an input option needed to select Occluded or NonOccluded!
+function [ dispError , imgMask , badPixels] = EvaluateDisp(ImageStruct,LEstDisp,tau,stateCheck) 
+% stateCheck an input option to select NonOccluded =1 or Occluded =2 
 % this function calculates the error rate of Left Estimated image (pixles which their errors are
 % greater than tua) except Occluded and unknown areas
 
+%if stateCheck not set, check  NonOccluded pixels by default
+if nargin<4
+	stateCheck=1;
+end
 
 LEstDisp=double(LEstDisp);
 if ImageStruct.type
